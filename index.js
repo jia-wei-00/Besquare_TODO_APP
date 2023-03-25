@@ -29,17 +29,18 @@ const loop_array = () => {
     // Create the paragraph element for todo name
     const todoName = document.createElement("p");
     todoName.id = "todo-name";
-    todoName.textContent = todo;
+    todoName.textContent = todo.value;
 
     // Create the span element for due date
     const dueDate = document.createElement("span");
     dueDate.classList.add("due-date");
-    dueDate.innerHTML = '<i class="fa-solid fa-calendar-days"></i> 24/3/2023';
+    dueDate.innerHTML =
+      '<i class="fa-solid fa-calendar-days"></i> ' + todo.created_at.date;
 
     // Create the div element for todo description
     const todoDesc = document.createElement("div");
     todoDesc.classList.add("todo-description");
-    todoDesc.textContent = todo;
+    todoDesc.textContent = todo.value;
 
     // Append the todo data elements to the todo data div
     todoDataDiv.appendChild(todoName);
@@ -69,7 +70,7 @@ const loop_array = () => {
   });
 };
 
-const add_into_array = () => {
+const add_into_array = (date) => {
   const todoList = document.getElementById("todo-list");
 
   const todo = document.getElementById("new-todo").value;
@@ -95,7 +96,7 @@ const add_into_array = () => {
   // Create the span element for due date
   const dueDate = document.createElement("span");
   dueDate.classList.add("due-date");
-  dueDate.innerHTML = '<i class="fa-solid fa-calendar-days"></i> 24/3/2023';
+  dueDate.innerHTML = '<i class="fa-solid fa-calendar-days"></i> ' + date;
 
   // Create the div element for todo description
   const todoDesc = document.createElement("div");
@@ -149,9 +150,9 @@ const delete_main = (event) => {
   const li = deleteBtn.closest("li"); // Get the parent li element
   const p = li.querySelector("#todo-name"); // Get the p element with id todo-name inside the li
   const pId = p.innerHTML; // Get the value of the p element
-  console.log(pId);
+
   // Remove the todo item from the array
-  todo_arr = todo_arr.filter((todo) => todo !== pId);
+  todo_arr = todo_arr.filter((todo) => todo.value !== pId);
 
   // Remove the li element from the DOM
   li.remove();
@@ -162,12 +163,13 @@ const delete_main = (event) => {
   if (todo_arr.length === 0) {
     if_empty_list();
   }
+
+  console.log(todo_arr);
 };
 
 document.addEventListener("DOMContentLoaded", function () {
   if (todo_arr.length === 0) {
     if_empty_list();
-    console.log("hello");
   } else {
     // loop the entire list in array
     loop_array();
@@ -185,9 +187,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (value.trim()) {
-      todo_arr.push(value);
+      const now = new Date();
+      const date = now.toLocaleDateString();
+      const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      todo_arr.push({ value: value, created_at: { date: date, time: time } });
       localStorage.setItem("todos", JSON.stringify(todo_arr));
-      add_into_array();
+      add_into_array(date);
       document.getElementById("new-todo").value = ""; // Clears the input field
     }
 
