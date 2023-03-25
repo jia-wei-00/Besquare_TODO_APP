@@ -1,0 +1,324 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+nav,
+ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+.mb {
+  margin-bottom: 10px;
+}
+
+:root {
+  --title: 18px;
+  --sub-title: 16px;
+  --text: 14px;
+  --small: 12px;
+  --extra-small: 10px;
+  --bg-main: #fcedda;
+  --text-light: #b0b7b7;
+  --text-primary: #212529;
+  --text-secondary: #ee4e34;
+  --bg-primary: #f4f4f4;
+  --bg-selected: #ebebeb;
+  --border-color: #d0d0d0;
+  --btn-primary: #fdd43a;
+  --padding-common: 16px;
+  --danger: #ff0000;
+  --white: #fff;
+}
+
+body {
+  background-color: var(--bg-main);
+  margin: 0 auto;
+  font-family: "Alkatra", cursive;
+}
+
+input,
+textarea {
+  font-family: "Alkatra", cursive;
+  outline: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+h2 {
+  font-size: var(--title);
+}
+
+.d-flex {
+  display: flex;
+  flex: 1;
+}
+
+.main-container {
+  background-color: var(--white);
+  height: calc(100vh - 160px);
+  border-radius: 16px;
+  margin: 80px 120px;
+  box-shadow: -1px 1px 106px -1px hsla(0, 6%, 50%, 0.63);
+  padding: var(--padding-common);
+}
+
+.main-container > div {
+  border-radius: 8px;
+  padding: var(--padding-common);
+}
+
+/* START LEFT BAR STYLE */
+
+.left-bar {
+  background-color: var(--bg-primary);
+  width: 300px;
+  overflow: auto;
+}
+
+.left-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form > input {
+  margin: 16px 0;
+  flex: 1;
+}
+
+#result-count {
+  font-size: var(--small);
+  justify-content: flex-end;
+  color: var(--text-secondary);
+}
+
+.result {
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+#result-list {
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+  position: relative;
+}
+
+.search-date {
+  font-size: var(--extra-small);
+  color: var(--text-light);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.no-data {
+  font-size: var(--text);
+  font-style: italic;
+  text-align: center;
+  flex: 1;
+  padding: 50px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* END LEFT BAR STYLE */
+
+/* START CONTENT STYLE */
+
+.content {
+  flex: 1;
+}
+
+.content-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+#date-input {
+  border: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  align-items: baseline;
+  cursor: pointer;
+}
+
+.todo-item:hover {
+  background-color: var(--bg-selected);
+}
+
+li:first-child.todo-item {
+  border-top: 1px solid var(--border-color);
+}
+
+.todo-item > input {
+  width: 15px;
+  height: 16px;
+  margin: 5px;
+}
+
+.todo-data {
+  flex: 1;
+  margin-left: 5px;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: var(--text-secondary);
+}
+
+.due-date {
+  font-size: var(--extra-small);
+  background-color: var(--bg-main);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.due-date > i {
+  margin-right: 5px;
+}
+
+.todo-description {
+  font-size: var(--extra-small);
+  padding: 20px 0 5px 5px;
+}
+
+/* END CONTENT STYLE */
+
+.right-bar {
+  background-color: var(--bg-primary);
+  width: 400px;
+  overflow-y: auto;
+}
+
+label {
+  display: block;
+  font-size: var(--text);
+  margin-bottom: 8px;
+}
+
+#edit-todo {
+  flex-direction: column;
+}
+
+#edit-todo > input,
+#edit-todo > textarea {
+  margin: 0 0 20px 0;
+}
+
+.date-created {
+  font-size: var(--extra-small);
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  border: none;
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: var(--text);
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+}
+
+.btn-delete {
+  background-color: var(--text-secondary);
+  color: var(--white);
+  margin-right: 10px;
+}
+
+.btn-update {
+  background-color: var(--btn-primary);
+}
