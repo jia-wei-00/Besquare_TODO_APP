@@ -13,9 +13,13 @@ const loop_array = () => {
 
   // Loop through the todo_arr array
   todo_arr.forEach(function (todo) {
+    const date = new Date(todo.created_at);
+    const dateString = date.toLocaleDateString();
+
     // Create a new li element
     const li = document.createElement("li");
     li.classList.add("todo-item");
+    li.setAttribute("onclick", "click_todo_item(event)");
 
     // Create the checkbox element
     const checkbox = document.createElement("input");
@@ -34,8 +38,9 @@ const loop_array = () => {
     // Create the span element for due date
     const dueDate = document.createElement("span");
     dueDate.classList.add("due-date");
+    dueDate.id = todo.created_at;
     dueDate.innerHTML =
-      '<i class="fa-solid fa-calendar-days"></i> ' + todo.created_at.date;
+      '<i class="fa-solid fa-calendar-days"></i> ' + dateString;
 
     // Create the div element for todo description
     const todoDesc = document.createElement("div");
@@ -71,6 +76,9 @@ const loop_array = () => {
 };
 
 const add_into_array = (date) => {
+  const addDate = new Date(date);
+  const dateString = addDate.toLocaleDateString();
+
   const todoList = document.getElementById("todo-list");
 
   const todo = document.getElementById("new-todo").value;
@@ -78,6 +86,7 @@ const add_into_array = (date) => {
   // Create a new li element
   const li = document.createElement("li");
   li.classList.add("todo-item");
+  li.setAttribute("onclick", "click_todo_item(event)");
 
   // Create the checkbox element
   const checkbox = document.createElement("input");
@@ -96,7 +105,8 @@ const add_into_array = (date) => {
   // Create the span element for due date
   const dueDate = document.createElement("span");
   dueDate.classList.add("due-date");
-  dueDate.innerHTML = '<i class="fa-solid fa-calendar-days"></i> ' + date;
+  dueDate.id = date;
+  dueDate.innerHTML = '<i class="fa-solid fa-calendar-days"></i> ' + dateString;
 
   // Create the div element for todo description
   const todoDesc = document.createElement("div");
@@ -128,6 +138,80 @@ const add_into_array = (date) => {
 
   // Append the li element to the todoList
   todoList.appendChild(li);
+};
+
+const right_bar = (value) => {
+  const todelete = document.getElementById("edit-todo");
+
+  if (todelete) {
+    todelete.remove();
+  }
+
+  const form = document.createElement("form");
+  form.setAttribute("id", "edit-todo");
+  form.classList.add("d-flex");
+  form.onsubmit = function () {
+    return false;
+  };
+
+  const title = document.createElement("h2");
+  title.textContent = "Title";
+  form.appendChild(title);
+
+  const titleInput = document.createElement("input");
+  titleInput.setAttribute("type", "text");
+  titleInput.value = value.value;
+  form.appendChild(titleInput);
+
+  const description = document.createElement("h2");
+  description.textContent = "Description";
+  form.appendChild(description);
+
+  const descriptionTextarea = document.createElement("textarea");
+  descriptionTextarea.setAttribute("cols", "30");
+  descriptionTextarea.setAttribute("rows", "10");
+  form.appendChild(descriptionTextarea);
+
+  console.log(value);
+
+  const date = new Date(value.created_at).toLocaleDateString();
+  const time = new Date(value.created_at).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+
+  const dateCreated = document.createElement("span");
+  dateCreated.classList.add("date-created");
+  dateCreated.textContent = "Date created: " + date + ", " + time;
+  form.appendChild(dateCreated);
+
+  const dueDate = document.createElement("h2");
+  dueDate.textContent = "Due Date";
+  form.appendChild(dueDate);
+
+  const dueDateInput = document.createElement("input");
+  dueDateInput.setAttribute("type", "date");
+  form.appendChild(dueDateInput);
+
+  const btnGroup = document.createElement("div");
+  btnGroup.classList.add("d-flex", "btn-group");
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("btn-edit", "btn-delete");
+  deleteButton.textContent = "Delete";
+  deleteButton.setAttribute("onclick", `delete_right(${value.created_at})`);
+  btnGroup.appendChild(deleteButton);
+
+  const updateButton = document.createElement("button");
+  updateButton.classList.add("btn-edit", "btn-update");
+  updateButton.textContent = "Update";
+  btnGroup.appendChild(updateButton);
+
+  form.appendChild(btnGroup);
+
+  const rightBar = document.getElementById("right-bar");
+  rightBar.appendChild(form);
 };
 
 const if_empty_list = () => {
@@ -167,6 +251,17 @@ const delete_main = (event) => {
   console.log(todo_arr);
 };
 
+const delete_right = (id) => {
+  const remove_right = document.getElementById("edit-todo");
+  remove_right.remove();
+  todo_arr = todo_arr.filter((todo) => todo.created_at !== id);
+  localStorage.setItem("todos", JSON.stringify(todo_arr));
+
+  const span = document.getElementById(id);
+  const li = span.closest("li");
+  li.remove();
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   if (todo_arr.length === 0) {
     if_empty_list();
@@ -187,13 +282,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (value.trim()) {
-      const now = new Date();
-      const date = now.toLocaleDateString();
-      const time = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      todo_arr.push({ value: value, created_at: { date: date, time: time } });
+      const date = Date.now();
+      todo_arr.push({ value: value, created_at: date });
       localStorage.setItem("todos", JSON.stringify(todo_arr));
       add_into_array(date);
       document.getElementById("new-todo").value = ""; // Clears the input field
@@ -202,6 +292,16 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(todo_arr);
   });
 });
+
+const click_todo_item = (event) => {
+  const task_block = event.target;
+  const li = task_block.closest("li");
+  const span = li.querySelector(".due-date");
+  const pId = span.id;
+
+  const index = todo_arr.findIndex((todo) => todo.created_at === Number(pId));
+  right_bar(todo_arr[index]);
+};
 
 const pushfunction = () => {
   const el = document.getElementById("render_element");
