@@ -19,7 +19,8 @@ const loop_array = () => {
     // Create a new li element
     const li = document.createElement("li");
     li.classList.add("todo-item");
-    li.setAttribute("onclick", "click_todo_item(event)");
+    li.id = todo.created_at;
+    li.setAttribute("onclick", `click_todo_item(${todo.created_at})`);
 
     // Create the checkbox element
     const checkbox = document.createElement("input");
@@ -49,8 +50,14 @@ const loop_array = () => {
 
     // Append the todo data elements to the todo data div
     todoDataDiv.appendChild(todoName);
-    todoDataDiv.appendChild(dueDate);
-    todoDataDiv.appendChild(todoDesc);
+
+    if (todo.due) {
+      todoDataDiv.appendChild(dueDate);
+    }
+
+    if (todo.desc) {
+      todoDataDiv.appendChild(todoDesc);
+    }
 
     // Create the expand todo button
     const expandBtn = document.createElement("button");
@@ -67,7 +74,11 @@ const loop_array = () => {
     // Append the checkbox, todo data div, expand button, and delete button to the li element
     li.appendChild(checkbox);
     li.appendChild(todoDataDiv);
-    li.appendChild(expandBtn);
+
+    if (todo.desc) {
+      li.appendChild(expandBtn);
+    }
+
     li.appendChild(deleteBtn);
 
     // Append the li element to the todoList
@@ -76,17 +87,14 @@ const loop_array = () => {
 };
 
 const add_into_array = (date) => {
-  const addDate = new Date(date);
-  const dateString = addDate.toLocaleDateString();
-
   const todoList = document.getElementById("todo-list");
-
   const todo = document.getElementById("new-todo").value;
 
   // Create a new li element
   const li = document.createElement("li");
   li.classList.add("todo-item");
-  li.setAttribute("onclick", "click_todo_item(event)");
+  li.id = date;
+  li.setAttribute("onclick", `click_todo_item(${date})`);
 
   // Create the checkbox element
   const checkbox = document.createElement("input");
@@ -102,27 +110,8 @@ const add_into_array = (date) => {
   todoName.id = "todo-name";
   todoName.textContent = todo;
 
-  // Create the span element for due date
-  const dueDate = document.createElement("span");
-  dueDate.classList.add("due-date");
-  dueDate.id = date;
-  dueDate.innerHTML = '<i class="fa-solid fa-calendar-days"></i> ' + dateString;
-
-  // Create the div element for todo description
-  const todoDesc = document.createElement("div");
-  todoDesc.classList.add("todo-description");
-
-  todoDesc.textContent = todo;
-
   // Append the todo data elements to the todo data div
   todoDataDiv.appendChild(todoName);
-  todoDataDiv.appendChild(dueDate);
-  todoDataDiv.appendChild(todoDesc);
-
-  // Create the expand todo button
-  const expandBtn = document.createElement("button");
-  expandBtn.classList.add("expand-todo", "btn");
-  expandBtn.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
 
   // Create the delete button
   const deleteBtn = document.createElement("button");
@@ -133,7 +122,6 @@ const add_into_array = (date) => {
   // Append the checkbox, todo data div, expand button, and delete button to the li element
   li.appendChild(checkbox);
   li.appendChild(todoDataDiv);
-  li.appendChild(expandBtn);
   li.appendChild(deleteBtn);
 
   // Append the li element to the todoList
@@ -293,13 +281,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const click_todo_item = (event) => {
-  const task_block = event.target;
-  const li = task_block.closest("li");
-  const span = li.querySelector(".due-date");
-  const pId = span.id;
-
-  const index = todo_arr.findIndex((todo) => todo.created_at === Number(pId));
+const click_todo_item = (id) => {
+  const index = todo_arr.findIndex((todo) => todo.created_at === id);
   right_bar(todo_arr[index]);
 };
 
