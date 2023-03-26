@@ -26,6 +26,9 @@ const loop_array = () => {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.id = "todo-check";
+    checkbox.setAttribute("onclick", `done(${todo.created_at})`);
+    checkbox.value = todo.done;
+    checkbox.checked = todo.done;
 
     // Create the div for todo data
     const todoDataDiv = document.createElement("div");
@@ -93,6 +96,9 @@ const add_into_array = (date) => {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.id = "todo-check";
+  checkbox.setAttribute("onclick", `done(${date})`);
+  checkbox.value = false;
+  checkbox.checked = false;
 
   // Create the div for todo data
   const todoDataDiv = document.createElement("div");
@@ -268,6 +274,31 @@ const update_func = (id) => {
   const todoList = document.getElementById("todo-list");
   todoList.innerHTML = "";
   loop_array();
+};
+
+const done = (id) => {
+  const index = todo_arr.findIndex((todo) => todo.created_at === id);
+  const li = document.getElementById(id);
+  const checkbox = li.querySelector("#todo-check");
+
+  if (index !== -1) {
+    if (checkbox.checked) {
+      // do something when checkbox is checked
+      todo_arr[index] = {
+        ...todo_arr[index], // keep existing properties
+        done: true, // update value checkbox
+      };
+    } else {
+      // do something when checkbox is unchecked
+      todo_arr[index] = {
+        ...todo_arr[index], // keep existing properties
+        done: false, // update value checkbox
+      };
+    }
+
+    localStorage.setItem("todos", JSON.stringify(todo_arr));
+    console.log(todo_arr);
+  }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
