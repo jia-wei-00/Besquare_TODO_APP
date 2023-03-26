@@ -183,6 +183,10 @@ form > input {
   flex: 1;
 }
 
+.form > input {
+  flex: 1;
+}
+
 #result-count {
   font-size: var(--small);
   justify-content: flex-end;

@@ -134,26 +134,23 @@ const right_bar = (value) => {
     todelete.remove();
   }
 
-  const form = document.createElement("form");
-  form.setAttribute("id", "edit-todo");
-  form.classList.add("d-flex");
-  form.onsubmit = function () {
-    return false;
-  };
+  const div = document.createElement("right_form");
+  div.setAttribute("id", "edit-todo");
+  div.classList.add("d-flex", ".form");
 
   const title = document.createElement("h2");
   title.textContent = "Title";
-  form.appendChild(title);
+  div.appendChild(title);
 
   const titleInput = document.createElement("input");
   titleInput.setAttribute("type", "text");
   titleInput.value = value.value;
   titleInput.id = "title-value";
-  form.appendChild(titleInput);
+  div.appendChild(titleInput);
 
   const description = document.createElement("h2");
   description.textContent = "Description";
-  form.appendChild(description);
+  div.appendChild(description);
 
   const descriptionTextarea = document.createElement("textarea");
   descriptionTextarea.setAttribute("cols", "30");
@@ -163,7 +160,7 @@ const right_bar = (value) => {
   if (value.desc) {
     descriptionTextarea.value = value.desc;
   }
-  form.appendChild(descriptionTextarea);
+  div.appendChild(descriptionTextarea);
 
   const date = new Date(value.created_at).toLocaleDateString();
   const time = new Date(value.created_at).toLocaleTimeString([], {
@@ -175,17 +172,17 @@ const right_bar = (value) => {
   const dateCreated = document.createElement("span");
   dateCreated.classList.add("date-created");
   dateCreated.textContent = "Date created: " + date + ", " + time;
-  form.appendChild(dateCreated);
+  div.appendChild(dateCreated);
 
   const dueDate = document.createElement("h2");
   dueDate.textContent = "Due Date";
-  form.appendChild(dueDate);
+  div.appendChild(dueDate);
 
   const dueDateInput = document.createElement("input");
   dueDateInput.setAttribute("type", "date");
   dueDateInput.id = "due-value";
   dueDateInput.value = value.dueDate;
-  form.appendChild(dueDateInput);
+  div.appendChild(dueDateInput);
 
   const btnGroup = document.createElement("div");
   btnGroup.classList.add("d-flex", "btn-group");
@@ -202,10 +199,10 @@ const right_bar = (value) => {
   updateButton.setAttribute("onclick", `update_func(${value.created_at})`);
   btnGroup.appendChild(updateButton);
 
-  form.appendChild(btnGroup);
+  div.appendChild(btnGroup);
 
   const rightBar = document.getElementById("right-bar");
-  rightBar.appendChild(form);
+  rightBar.appendChild(div);
 };
 
 const empty_search = () => {
