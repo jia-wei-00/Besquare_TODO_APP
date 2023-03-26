@@ -30,6 +30,7 @@ const loop_array = () => {
     // Create the div for todo data
     const todoDataDiv = document.createElement("div");
     todoDataDiv.classList.add("todo-data");
+    todoDataDiv.id = "todo-data";
 
     // Create the paragraph element for todo name
     const todoName = document.createElement("p");
@@ -41,28 +42,20 @@ const loop_array = () => {
     dueDate.classList.add("due-date");
     dueDate.id = todo.created_at;
     dueDate.innerHTML =
-      '<i class="fa-solid fa-calendar-days"></i> ' + dateString;
-
-    // Create the div element for todo description
-    const todoDesc = document.createElement("div");
-    todoDesc.classList.add("todo-description");
-    todoDesc.textContent = todo.value;
+      '<i class="fa-solid fa-calendar-days"></i> ' + todo.dueDate;
 
     // Append the todo data elements to the todo data div
     todoDataDiv.appendChild(todoName);
 
-    if (todo.due) {
+    if (todo.dueDate) {
       todoDataDiv.appendChild(dueDate);
-    }
-
-    if (todo.desc) {
-      todoDataDiv.appendChild(todoDesc);
     }
 
     // Create the expand todo button
     const expandBtn = document.createElement("button");
     expandBtn.classList.add("expand-todo", "btn");
-    expandBtn.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
+    expandBtn.setAttribute("onclick", `click_expand(${todo.created_at})`);
+    expandBtn.innerHTML = '<i id="icon" class="fa-solid fa-chevron-down"></i>';
 
     // Create the delete button
     const deleteBtn = document.createElement("button");
@@ -149,6 +142,7 @@ const right_bar = (value) => {
   const titleInput = document.createElement("input");
   titleInput.setAttribute("type", "text");
   titleInput.value = value.value;
+  titleInput.id = "title-value";
   form.appendChild(titleInput);
 
   const description = document.createElement("h2");
@@ -158,9 +152,12 @@ const right_bar = (value) => {
   const descriptionTextarea = document.createElement("textarea");
   descriptionTextarea.setAttribute("cols", "30");
   descriptionTextarea.setAttribute("rows", "10");
-  form.appendChild(descriptionTextarea);
+  descriptionTextarea.id = "desc-value";
 
-  console.log(value);
+  if (value.desc) {
+    descriptionTextarea.value = value.desc;
+  }
+  form.appendChild(descriptionTextarea);
 
   const date = new Date(value.created_at).toLocaleDateString();
   const time = new Date(value.created_at).toLocaleTimeString([], {
@@ -180,6 +177,8 @@ const right_bar = (value) => {
 
   const dueDateInput = document.createElement("input");
   dueDateInput.setAttribute("type", "date");
+  dueDateInput.id = "due-value";
+  dueDateInput.value = value.dueDate;
   form.appendChild(dueDateInput);
 
   const btnGroup = document.createElement("div");
@@ -194,6 +193,7 @@ const right_bar = (value) => {
   const updateButton = document.createElement("button");
   updateButton.classList.add("btn-edit", "btn-update");
   updateButton.textContent = "Update";
+  updateButton.setAttribute("onclick", `update_func(${value.created_at})`);
   btnGroup.appendChild(updateButton);
 
   form.appendChild(btnGroup);
@@ -235,8 +235,6 @@ const delete_main = (event) => {
   if (todo_arr.length === 0) {
     if_empty_list();
   }
-
-  console.log(todo_arr);
 };
 
 const delete_right = (id) => {
@@ -248,6 +246,28 @@ const delete_right = (id) => {
   const span = document.getElementById(id);
   const li = span.closest("li");
   li.remove();
+};
+
+const update_func = (id) => {
+  const title = document.getElementById("title-value").value;
+  const desc = document.getElementById("desc-value").value;
+  const due = document.getElementById("due-value").value;
+
+  const index = todo_arr.findIndex((todo) => todo.created_at === id);
+
+  if (index !== -1) {
+    todo_arr[index] = {
+      ...todo_arr[index], // keep existing properties
+      value: title, // update value property
+      desc: desc, // add new desc property
+      dueDate: due, // add new dueDate property
+    };
+    localStorage.setItem("todos", JSON.stringify(todo_arr));
+  }
+
+  const todoList = document.getElementById("todo-list");
+  todoList.innerHTML = "";
+  loop_array();
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -276,8 +296,6 @@ document.addEventListener("DOMContentLoaded", function () {
       add_into_array(date);
       document.getElementById("new-todo").value = ""; // Clears the input field
     }
-
-    console.log(todo_arr);
   });
 });
 
@@ -286,29 +304,30 @@ const click_todo_item = (id) => {
   right_bar(todo_arr[index]);
 };
 
-const pushfunction = () => {
-  const el = document.getElementById("render_element");
-  const input = document.getElementById("value").value;
-  if (input.trim()) {
-    a.push(input);
+const click_expand = (id) => {
+  const index = todo_arr.findIndex((todo) => todo.created_at === id);
+  right_bar(todo_arr[index]);
+
+  // Create the div element for todo description
+  const task = document.getElementById(id);
+
+  const check_exists = task.querySelector(".todo-description");
+
+  if (!check_exists) {
+    const todo_data = task.querySelector(".todo-data");
+    const todoDesc = document.createElement("div");
+    todoDesc.classList.add("todo-description");
+    todoDesc.textContent = todo_arr[index].desc;
+    todo_data.appendChild(todoDesc);
+  } else {
+    check_exists.remove();
   }
-  console.log(a);
 
-  var divElement = document.createElement("div");
-  divElement.innerText = input;
-  el.appendChild(divElement);
-
-  var deleteButton = document.createElement("button");
-  deleteButton.innerHTML = "delete";
-  divElement.appendChild(deleteButton);
-
-  deleteButton.addEventListener("click", function () {
-    divElement.remove();
-
-    console.log(a);
-    const indexOfElement = a.indexOf(input);
-    console.log(indexOfElement, "index");
-    a.splice(indexOfElement, 1);
-    console.log(a);
-  });
+  const find_button = task.querySelector(".expand-todo");
+  const icon = find_button.querySelector("i");
+  if (icon.classList.contains("fa-chevron-down")) {
+    icon.classList.replace("fa-chevron-down", "fa-chevron-up");
+  } else {
+    icon.classList.replace("fa-chevron-up", "fa-chevron-down");
+  }
 };
