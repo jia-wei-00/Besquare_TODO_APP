@@ -208,6 +208,56 @@ const right_bar = (value) => {
   rightBar.appendChild(form);
 };
 
+const empty_search = () => {
+  const ul = document.getElementById("result-box");
+  const li = document.createElement("li");
+  li.className = "d-flex mb";
+  const div = document.createElement("div");
+  div.className = "mt no-data";
+  div.textContent = "Empty Data";
+  li.appendChild(div);
+  ul.appendChild(li);
+};
+
+const search_result_func = (value) => {
+  const ul = document.getElementById("result-box");
+
+  const li = document.createElement("li");
+  li.className = "d-flex result mb";
+
+  const div = document.createElement("div");
+  div.id = "result-count";
+  div.className = "mt";
+  div.textContent = `Showing: ${value.length} result`;
+
+  li.appendChild(div);
+  ul.appendChild(li);
+
+  value.forEach((result) => {
+    const li = document.createElement("li");
+    li.className = "d-flex result mb";
+
+    const div = document.createElement("div");
+    div.id = "result-list";
+
+    const date = new Date(result.created_at).toLocaleDateString();
+    const time = new Date(result.created_at).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const span = document.createElement("span");
+    span.className = "search-date";
+    span.textContent = `${date + " " + time}`;
+
+    div.textContent = result.value;
+    div.appendChild(span);
+
+    li.appendChild(div);
+    ul.appendChild(li);
+  });
+};
+
 const if_empty_list = () => {
   // Create a new li element
   const li = document.createElement("li");
@@ -308,6 +358,33 @@ document.addEventListener("DOMContentLoaded", function () {
     // loop the entire list in array
     loop_array();
   }
+
+  // search box function
+  const search_form = document.getElementById("search-form");
+  search_form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const search_input = document.getElementById("search-input").value;
+
+    if (search_input.trim()) {
+      const search_result = todo_arr.filter((todo) => {
+        return todo.value.toLowerCase().includes(search_input.toLowerCase());
+      });
+
+      const result_box = document.getElementById("result-box");
+      result_box.innerHTML = "";
+
+      if (search_result.length === 0) {
+        empty_search();
+      } else {
+        search_result_func(search_result);
+      }
+    } else {
+      const result_box = document.getElementById("result-box");
+      result_box.innerHTML = "";
+      empty_search();
+    }
+  });
 
   // add task into to-do list
   const addTodo = document.getElementById("add-todo-form");
