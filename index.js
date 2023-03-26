@@ -299,6 +299,10 @@ const delete_right = (id) => {
   const span = document.getElementById(id);
   const li = span.closest("li");
   li.remove();
+
+  if (todo_arr.length === 0) {
+    if_empty_list();
+  }
 };
 
 const update_func = (id) => {
@@ -391,7 +395,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (todo_arr.length === 0) {
       const toRemove = document.getElementById("empty-list");
-      toRemove.remove();
+      if (toRemove) {
+        toRemove.remove();
+      }
     }
 
     if (value.trim()) {
