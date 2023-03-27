@@ -37,6 +37,11 @@ ul {
   margin-bottom: 10px;
 }
 
+i {
+  font-size: 12px;
+  padding: 0 5px;
+}
+
 body {
   background-color: #fcedda;
   margin: 0 auto;
@@ -52,6 +57,8 @@ textarea {
   border-radius: 8px;
   padding: 10px;
   background-color: transparent;
+  font-size: 14px;
+  font-weight: 200;
 }
 
 h2 {
@@ -65,7 +72,7 @@ h2 {
 
 .main-container {
   background-color: #fff;
-  height: cal(160);
+  height: calc(100vh - 160px);
   border-radius: 16px;
   margin: 80px 120px;
   box-shadow: -1px 1px 106px -1px hsla(0, 6%, 50%, 0.63);
@@ -87,7 +94,7 @@ h2 {
   align-items: center;
 }
 
-form input {
+form > input {
   margin: 16px 0;
   flex: 1;
 }
@@ -105,7 +112,7 @@ form input {
 }
 #result-box {
   overflow-y: auto;
-  height: cal(290);
+  height: calc(100vh - 290px);
 }
 
 .result {
@@ -163,7 +170,7 @@ form input {
 }
 
 #todo-list {
-  height: cal(300);
+  height: calc(100vh - 300px);
   overflow: auto;
 }
 
@@ -229,7 +236,6 @@ label {
 .btn-group {
   justify-content: flex-end;
 }
-
 .btn-edit {
   border: none;
   border-radius: 4px;
@@ -239,7 +245,6 @@ label {
   letter-spacing: 1px;
   padding: 10px 20px;
 }
-
 .btn-delete {
   background-color: #ee4e34;
   color: #fff;
@@ -251,7 +256,6 @@ label {
   background-color: #fff;
   color: #ee4e34;
 }
-
 .btn-update {
   background-color: #fdd43a;
   transition: 0.3s ease-in-out all;

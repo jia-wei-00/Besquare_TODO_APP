@@ -1,5 +1,6 @@
 @import "./_mixins.scss";
 @import "./_variables.scss";
+@import "./_functions.scss";
 
 // reset stylesheet
 * {
@@ -43,6 +44,11 @@ ul {
   margin-bottom: 10px;
 }
 
+i {
+  font-size: 12px;
+  padding: 0 5px;
+}
+
 body {
   background-color: $--bg-main;
   margin: 0 auto;
@@ -58,6 +64,8 @@ textarea {
   border-radius: 8px;
   padding: 10px;
   background-color: transparent;
+  font-size: $--text;
+  font-weight: 200;
 }
 
 h2 {
@@ -98,7 +106,7 @@ h2 {
 }
 
 form {
-  input {
+  & > input {
     margin: 16px 0;
     flex: 1;
   }
@@ -251,40 +259,42 @@ label {
   margin-bottom: 20px;
 }
 
-.btn-group {
-  justify-content: flex-end;
-}
-
-.btn-edit {
-  border: none;
-  border-radius: 4px;
-  color: $--text-primary;
-  font-size: $--text;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 10px 20px;
-}
-
-.btn-delete {
-  background-color: $--text-secondary;
-  color: $--white;
-  margin-right: 10px;
-  transition: 0.3s ease-in-out all;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $--white;
-    color: $--text-secondary;
+.btn {
+  &-group {
+    justify-content: flex-end;
   }
-}
 
-.btn-update {
-  background-color: $--btn-primary;
-  transition: 0.3s ease-in-out all;
-  cursor: pointer;
+  &-edit {
+    border: none;
+    border-radius: 4px;
+    color: $--text-primary;
+    font-size: $--text;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+  }
 
-  &:hover {
-    background-color: $--white;
-    color: $--btn-primary;
+  &-delete {
+    background-color: $--text-secondary;
+    color: $--white;
+    margin-right: 10px;
+    transition: 0.3s ease-in-out all;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $--white;
+      color: $--text-secondary;
+    }
+  }
+
+  &-update {
+    background-color: $--btn-primary;
+    transition: 0.3s ease-in-out all;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $--white;
+      color: $--btn-primary;
+    }
   }
 }

@@ -1,3 +1,3 @@
 @function cal($number) {
-    @return 100vh - $number * 1px;
+  @return calc(100vh - $number * 1px);
 }
