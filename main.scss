@@ -1,0 +1,290 @@
+@import "./_mixins.scss";
+@import "./_variables.scss";
+
+// reset stylesheet
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+nav,
+ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+// scrollbar style
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+
+  &-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: transparent;
+  }
+
+  &-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: #e6e6e6;
+  }
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+.mb {
+  margin-bottom: 10px;
+}
+
+body {
+  background-color: $--bg-main;
+  margin: 0 auto;
+  font-family: "Alkatra", cursive;
+  overflow: hidden;
+}
+
+input,
+textarea {
+  font-family: "Alkatra", cursive;
+  outline: none;
+  border: 1px solid $--border-color;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+h2 {
+  font-size: $--title;
+}
+
+.d-flex {
+  display: flex;
+  flex: 1;
+}
+
+.main-container {
+  background-color: $--white;
+  height: cal(160);
+  border-radius: 16px;
+  margin: 80px 120px;
+  box-shadow: -1px 1px 106px -1px hsla(0, 6%, 50%, 0.63);
+  padding: $--padding-common;
+
+  & > div {
+    border-radius: 8px;
+    padding: $--padding-common;
+  }
+}
+
+/* START LEFT BAR STYLE */
+.left {
+  &-bar {
+    background-color: $--bg-primary;
+    width: 300px;
+  }
+
+  &-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+form {
+  input {
+    margin: 16px 0;
+    flex: 1;
+  }
+}
+
+#result {
+  &-count {
+    font-size: $--small;
+    justify-content: flex-end;
+    color: $--text-secondary;
+  }
+
+  &-list {
+    border-bottom: 1px solid $--border-color;
+    width: 100%;
+    position: relative;
+    margin: 5px 0;
+  }
+
+  &-box {
+    overflow-y: auto;
+    height: cal(290);
+  }
+}
+
+.result {
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.search-date {
+  font-size: $--extra-small;
+  color: $--text-light;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.no-data {
+  font-size: $--text;
+  font-style: italic;
+  text-align: center;
+  flex: 1;
+  padding: 50px 0;
+  border-bottom: 1px solid $--border-color;
+}
+
+/* END LEFT BAR STYLE */
+
+/* START CONTENT STYLE */
+
+.content {
+  flex: 1;
+
+  &-title {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+#date-input {
+  border: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid $--border-color;
+  align-items: baseline;
+  cursor: pointer;
+  transition: 0.3s ease-in-out all;
+
+  &:hover {
+    background-color: $--bg-selected;
+  }
+
+  & > input {
+    width: 15px;
+    height: 16px;
+    margin: 5px;
+  }
+}
+
+#todo-list {
+  height: cal(300);
+  overflow: auto;
+}
+
+li:first-child.todo-item {
+  border-top: 1px solid $--border-color;
+}
+
+.todo-data {
+  flex: 1;
+  margin-left: 5px;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: $--text-secondary;
+}
+
+.due-date {
+  font-size: $--extra-small;
+  background-color: $--bg-main;
+  padding: 5px;
+  border-radius: 5px;
+
+  & > i {
+    margin-right: 5px;
+  }
+}
+
+.todo-description {
+  font-size: $--extra-small;
+  padding: 20px 0 5px 5px;
+}
+
+/* END CONTENT STYLE */
+
+.right-bar {
+  background-color: $--bg-primary;
+  width: 400px;
+  overflow-y: auto;
+}
+
+label {
+  display: block;
+  font-size: $--text;
+  margin-bottom: 8px;
+}
+
+#edit-todo {
+  flex-direction: column;
+
+  & > input,
+  & > textarea {
+    margin: 0 0 20px 0;
+  }
+}
+
+.date-created {
+  font-size: $--extra-small;
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  border: none;
+  border-radius: 4px;
+  color: $--text-primary;
+  font-size: $--text;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+}
+
+.btn-delete {
+  background-color: $--text-secondary;
+  color: $--white;
+  margin-right: 10px;
+  transition: 0.3s ease-in-out all;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $--white;
+    color: $--text-secondary;
+  }
+}
+
+.btn-update {
+  background-color: $--btn-primary;
+  transition: 0.3s ease-in-out all;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $--white;
+    color: $--btn-primary;
+  }
+}

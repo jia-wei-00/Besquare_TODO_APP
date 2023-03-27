@@ -1,0 +1,17 @@
+{
+  "name": "besquare_todo_app",
+  "version": "1.0.0",
+  "description": "Check out the live version [here](https://jia-besquare-todo-vanilla.vercel.app/).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass main.scss styles.css",
+    "sass:watch": "sass main.scss styles.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.60.0"
+  }
+}

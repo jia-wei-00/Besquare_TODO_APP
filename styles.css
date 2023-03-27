@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+nav,
+ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  background-color: #e6e6e6;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+.mb {
+  margin-bottom: 10px;
+}
+
+body {
+  background-color: #fcedda;
+  margin: 0 auto;
+  font-family: "Alkatra", cursive;
+  overflow: hidden;
+}
+
+input,
+textarea {
+  font-family: "Alkatra", cursive;
+  outline: none;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+.d-flex {
+  display: flex;
+  flex: 1;
+}
+
+.main-container {
+  background-color: #fff;
+  height: cal(160);
+  border-radius: 16px;
+  margin: 80px 120px;
+  box-shadow: -1px 1px 106px -1px hsla(0, 6%, 50%, 0.63);
+  padding: 16px;
+}
+.main-container > div {
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* START LEFT BAR STYLE */
+.left-bar {
+  background-color: #f4f4f4;
+  width: 300px;
+}
+.left-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form input {
+  margin: 16px 0;
+  flex: 1;
+}
+
+#result-count {
+  font-size: 12px;
+  justify-content: flex-end;
+  color: #ee4e34;
+}
+#result-list {
+  border-bottom: 1px solid #d0d0d0;
+  width: 100%;
+  position: relative;
+  margin: 5px 0;
+}
+#result-box {
+  overflow-y: auto;
+  height: cal(290);
+}
+
+.result {
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.search-date {
+  font-size: 10px;
+  color: #b0b7b7;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.no-data {
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  flex: 1;
+  padding: 50px 0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+/* END LEFT BAR STYLE */
+/* START CONTENT STYLE */
+.content {
+  flex: 1;
+}
+.content-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+#date-input {
+  border: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid #d0d0d0;
+  align-items: baseline;
+  cursor: pointer;
+  transition: 0.3s ease-in-out all;
+}
+.todo-item:hover {
+  background-color: #ebebeb;
+}
+.todo-item > input {
+  width: 15px;
+  height: 16px;
+  margin: 5px;
+}
+
+#todo-list {
+  height: cal(300);
+  overflow: auto;
+}
+
+li:first-child.todo-item {
+  border-top: 1px solid #d0d0d0;
+}
+
+.todo-data {
+  flex: 1;
+  margin-left: 5px;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: #ee4e34;
+}
+
+.due-date {
+  font-size: 10px;
+  background-color: #fcedda;
+  padding: 5px;
+  border-radius: 5px;
+}
+.due-date > i {
+  margin-right: 5px;
+}
+
+.todo-description {
+  font-size: 10px;
+  padding: 20px 0 5px 5px;
+}
+
+/* END CONTENT STYLE */
+.right-bar {
+  background-color: #f4f4f4;
+  width: 400px;
+  overflow-y: auto;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+#edit-todo {
+  flex-direction: column;
+}
+#edit-todo > input, #edit-todo > textarea {
+  margin: 0 0 20px 0;
+}
+
+.date-created {
+  font-size: 10px;
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  border: none;
+  border-radius: 4px;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+}
+
+.btn-delete {
+  background-color: #ee4e34;
+  color: #fff;
+  margin-right: 10px;
+  transition: 0.3s ease-in-out all;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  background-color: #fff;
+  color: #ee4e34;
+}
+
+.btn-update {
+  background-color: #fdd43a;
+  transition: 0.3s ease-in-out all;
+  cursor: pointer;
+}
+.btn-update:hover {
+  background-color: #fff;
+  color: #fdd43a;
+}
+
+/*# sourceMappingURL=styles.css.map */
