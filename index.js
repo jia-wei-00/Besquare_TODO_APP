@@ -188,13 +188,13 @@ const right_bar = (value) => {
   btnGroup.classList.add("d-flex", "btn-group");
 
   const deleteButton = document.createElement("button");
-  deleteButton.classList.add("btn-edit", "btn-delete");
+  deleteButton.classList.add("btn-edit", "btn-delete", "btn");
   deleteButton.textContent = "Delete";
   deleteButton.setAttribute("onclick", `delete_right(${value.created_at})`);
   btnGroup.appendChild(deleteButton);
 
   const updateButton = document.createElement("button");
-  updateButton.classList.add("btn-edit", "btn-update");
+  updateButton.classList.add("btn-edit", "btn-update", "btn");
   updateButton.textContent = "Update";
   updateButton.setAttribute("onclick", `update_func(${value.created_at})`);
   btnGroup.appendChild(updateButton);

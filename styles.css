@@ -6,6 +6,7 @@
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  transition: 0.5s ease-in-out all;
 }
 
 nav,
@@ -60,7 +61,19 @@ textarea {
   font-size: 14px;
   font-weight: 200;
 }
+input:focus,
+textarea:focus {
+  box-shadow: 0px 15px 20px rgba(176, 183, 183, 0.4);
+}
 
+@keyframes buttonkf {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-365deg);
+  }
+}
 h2 {
   font-size: 18px;
 }
@@ -102,7 +115,7 @@ form > input {
 #result-count {
   font-size: 12px;
   justify-content: flex-end;
-  color: #ee4e34;
+  color: rgb(238, 78, 52);
 }
 #result-list {
   border-bottom: 1px solid #d0d0d0;
@@ -122,7 +135,7 @@ form > input {
 
 .search-date {
   font-size: 10px;
-  color: #b0b7b7;
+  color: rgb(176, 183, 183);
   position: absolute;
   right: 0;
   bottom: 0;
@@ -190,7 +203,7 @@ li:first-child.todo-item {
 }
 
 .delete-btn {
-  color: #ee4e34;
+  color: rgb(238, 78, 52);
 }
 
 .due-date {
@@ -233,6 +246,9 @@ label {
   margin-bottom: 20px;
 }
 
+.btn {
+  transition: 1s ease-in-out all;
+}
 .btn-group {
   justify-content: flex-end;
 }
@@ -246,7 +262,7 @@ label {
   padding: 10px 20px;
 }
 .btn-delete {
-  background-color: #ee4e34;
+  background-color: rgb(238, 78, 52);
   color: #fff;
   margin-right: 10px;
   transition: 0.3s ease-in-out all;
@@ -254,7 +270,9 @@ label {
 }
 .btn-delete:hover {
   background-color: #fff;
-  color: #ee4e34;
+  box-shadow: 0px 15px 20px rgba(238, 78, 52, 0.4);
+  color: rgb(238, 78, 52);
+  transform: translateY(-5px);
 }
 .btn-update {
   background-color: #fdd43a;
@@ -263,7 +281,9 @@ label {
 }
 .btn-update:hover {
   background-color: #fff;
+  box-shadow: 0px 15px 20px rgba(253, 212, 58, 0.4);
   color: #fdd43a;
+  transform: translateY(-5px);
 }
 
 /*# sourceMappingURL=styles.css.map */

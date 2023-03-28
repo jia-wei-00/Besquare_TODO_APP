@@ -11,6 +11,7 @@
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  transition: 0.5s ease-in-out all;
 }
 nav,
 ul {
@@ -66,6 +67,19 @@ textarea {
   background-color: transparent;
   font-size: $--text;
   font-weight: 200;
+
+  &:focus {
+    box-shadow: 0px 15px 20px $--text-light-shadow;
+  }
+}
+
+@keyframes buttonkf {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-365deg);
+  }
 }
 
 h2 {
@@ -260,6 +274,8 @@ label {
 }
 
 .btn {
+  transition: 1s ease-in-out all;
+
   &-group {
     justify-content: flex-end;
   }
@@ -282,8 +298,7 @@ label {
     cursor: pointer;
 
     &:hover {
-      background-color: $--white;
-      color: $--text-secondary;
+      @include btn_hover($--text-secondary, $--white, $--text-secondary-shadow);
     }
   }
 
@@ -293,8 +308,7 @@ label {
     cursor: pointer;
 
     &:hover {
-      background-color: $--white;
-      color: $--btn-primary;
+      @include btn_hover($--btn-primary, $--white, $--btn-primary-shadow);
     }
   }
 }
